@@ -1,8 +1,8 @@
-# Croc saves the Marshs
+# Croc saves Marshland
 
 ## Description
 
-Croc saves the Marshs is a game where the player has to move Croc to stop the monsters from colliding with the hairy marshmallows. After 20 seconds, the speed intervals randomize themselves and get quicker for higher difficulty. If you survive 1 minute you win the game. If the monsters get to pass Croc and collide with the Marshmallows, it’s game over.
+Croc saves Marshland is a game where the player has to move Croc to stop the monsters from colliding with the hairy marshmallows. After 20 seconds, the speed intervals randomize themselves and get quicker for higher difficulty. If you survive 1 minute you win the game. If the monsters get to pass Croc and collide with the Marshmallows, it’s game over.
 
 MVP (DOM - CANVAS)
 
@@ -15,72 +15,79 @@ MVP (DOM - CANVAS)
 - If marshmallows reach the house in the top-left side of the screen, they disappear.
 
 ## Backlog
--Timer.
--Sounds.
--Special Effects.
--Sprites.
--Speed up.
--Score.
--Multiple enemies.
--Bonus items randomly appearing to slow down the speed.
--Bonuses.
--Badges.
+- Timer
+- Sounds
+- Special Effects
+- Sprites
+- Speed up
+- Score
+- Multiple enemies
+- Bonus items randomly appearing to slow down the speed
+- Bonuses
+- Badges
 
 ## Data structure
-main.js
+### main.js
+```
 drawSplashScreen(){}
 drawGameScreen(){}
 drawGameOverScreen(){}
 drawWinScreen(){}
-
+```
 game.js
+```
 game () {
--constructor()
--init()
--animate ()
--drawCroc ()
--drawMonsters ()
--drawMarshs ()
--drawGingerBHouse ()
--clearCanvas ()
--drawBackground ()
--detectCollision()
--gameOver ()
--winner ()
+- constructor()
+- init()
+- animate ()
+- drawMainCharacter ()
+- drawMonsters ()
+- drawMarshs ()
+- drawGingerBHouse ()
+- clearCanvas ()
+- drawBackground ()
+- detectCollision()
+- gameOver ()
+- winner ()
 }
-
+```
 component.js
+```
 component{
--constructor()
--boundaries()
--drawComponent()
+- constructor()
+- boundaries()
+- drawComponent()
 }
-
+```
 croc.js
+```
 croc extends Component(){
--constructor () {}
--move ()
+- constructor () {}
+- move ()
 }
-
+```
 monsters.js
+```
 enemyMonster extends Component(){
--constructor()
--move()
--collisionCroc()
--collisionMarsh()
+- constructor()
+- move()
+- collisionCroc()
+- collisionMarsh()
 }
-
+```
 marshmallows.js
+```
 friendMarsh extends Component(){
--constructor()
--move()
--collisionHouse()
--collisionMonster()
+constructor()
+move()
+collisionHouse()
+collisionMonster()
 }
-
-gingerBHouse.js
+```
+gingerbHouse.js
+```
 house extends Component ()
-
+```
 ## States e States Transitions
 Definition of the different states and their transition (transition functions)
 
@@ -102,6 +109,7 @@ Win()
 - addEventListener(playAgain) 
 
 ## Task
+```
 main - drawSplashScreen(){addeventListener}
 main - drawGameScreen()
 game - constructor ()
@@ -129,7 +137,7 @@ main - drawGameOverScreen(){addeventListener}
 game - gameOver ()
 main - drawWinScreen(){addeventListener}
 game - winner ()
-
+```
 ## Links
 
 ### Trello
@@ -145,4 +153,4 @@ URls for the project presentation (slides)
 [Link Slides.com](http://slides.com)
 
 ### Credits
-*Credit sprites: bevouliin ( https://bevouliin.com/crocodile-mascot-game-character-sprites/ )
+*Credit sprites: bevouliin ( https://bevouliin.com/ )
