@@ -7,6 +7,7 @@ class Marsh extends Component {
       this.height = 80;
       this.img = new Image();
     }
+    
     draw() {
       this.img.src = "imges/marsh.png";
       this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -17,5 +18,25 @@ class Marsh extends Component {
         this.y -= 5;
       }
     }
+
+    //get the four sides of the Player
+    bottom() { return this.y + this.height;}
+    left () { return this.x; }
+    right () { return this.x + this.width; }
+    top () {return this.y;}
+    
+    crashCollision(element) {
+     
+     //if any of those conditions are true there is no collision
+ 
+     if (this.top() > element.y + element.height || this.right() < element.x || this.bottom() < element.y || this.left() > element.x + element.width){
+
+       return false;
+
+     }
+     
+     return true;
+       
+   }
   }
   

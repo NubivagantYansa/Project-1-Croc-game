@@ -29,7 +29,6 @@ class Game {
             this.drawBackground();
             this.drawPlayer();
             this.player.move();
-
             
             //monsters - player 
             for (let i = 0; i < this.monsters.length; i++) {
@@ -38,7 +37,8 @@ class Game {
                 //if player - monster collision => monster disappears
                 if (this.player.crashCollision(this.monsters[i])){
                     return this.monsters.splice(i, 1);
-                } 
+                }
+
                 //removes monster from canvas
                 if (this.monsters[i].x < 0) {
                     this.monsters.splice(i, 1);
@@ -49,12 +49,16 @@ class Game {
             for (let i = 0; i < this.marsh.length; i++) {
                 this.marsh[i].move();
                 this.marsh[i].draw();
+                this.marsh.forEach((marsh, idx) =>{
+                    if (marsh.crashCollision(this.monsters[i])){
+                        return marsh.splice(idx, 1)
+                    }
+                })
             
-                //removes marsh from canvas
+                //removes marsh from canvas ===> add here collision with house
                 if (this.marsh[i].y < 0) {
                     this.marsh.splice(i, 1);
                     }
-    
               }
            }, 1000 / 60);
     }
