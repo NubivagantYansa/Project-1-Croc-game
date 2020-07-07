@@ -1,6 +1,6 @@
 window.onload = () => {
 
-    addElement = (el) => {
+  addElement = (el) => {
 
     //create a div container for the elemens of the screen
     let parent = document.getElementById('game-board');
@@ -14,15 +14,18 @@ window.onload = () => {
     return divContainer.lastElementChild //the function returns the new element created
   };
 
-    setAttributes = (el, attrs) =>{
+
+  setAttributes = (el, attrs) =>{
       for(let key in attrs) {
         el.setAttribute(key, attrs[key]);
       }
     }
 
+
   removeScreen = () => {
       document.getElementById('game-board').innerHTML = '';
   };
+
 
 
   drawSplashScreen = () => {
@@ -32,7 +35,6 @@ window.onload = () => {
 
     // Croc image + attributes
     let crocImg = addElement('img');
-
     setAttributes (crocImg, {'src': 'imges/frame-1.png', 'alt': 'croc-logo', 'class': 'logo-img'})
 
     //button
@@ -43,7 +45,7 @@ window.onload = () => {
     document.getElementById('start-button').onclick = () => {
         removeScreen ();
         drawGameScreen ();
-        startGame()
+        startGame();
     };
 
     //description
@@ -55,14 +57,16 @@ window.onload = () => {
 
   };
       
+
+
   drawGameScreen = () => { 
 
     //creates canvas
     let canvas = addElement('canvas');
-
     //sets attributes
     setAttributes (canvas, {'id': 'canvas', 'width': '1250px', 'height': '810px'});
   }
+
 
 
   drawGameOverScreen = () => {
@@ -79,7 +83,6 @@ window.onload = () => {
       let startbtn = addElement('button');
       startbtn.setAttribute('id', 'start-button');
       startbtn.innerText = 'Try again';
-
       document.getElementById('start-button').onclick = () => {
           removeScreen ();
           drawSplashScreen()
@@ -87,6 +90,8 @@ window.onload = () => {
       };
   }
       
+
+  
   drawWinScreen = () => {
 
     //add headings
@@ -108,20 +113,19 @@ window.onload = () => {
         };
   }
 
+
+
     //uncomment to test the screens
     // drawGameOverScreen()
     // drawWinScreen()
 
+  //start the Game
+  drawSplashScreen();
 
-    //start the Game
-    drawSplashScreen();
-
-    startGame = () => {
-        const myGame = new Game();
-        myGame.init();
-        }
-
-
+  startGame = () => {
+    const myGame = new Game();
+    myGame.init();
+  }
 
     
 };

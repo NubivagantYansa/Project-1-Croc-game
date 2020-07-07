@@ -40,9 +40,8 @@ game () {
 - constructor()
 - init()
 - animate ()
-- drawMainCharacter ()
-- drawMonsters ()
-- drawMarshs ()
+- drawPlayer ()
+- drawCharacters ()
 - drawGingerBHouse ()
 - clearCanvas ()
 - drawBackground ()
@@ -59,25 +58,25 @@ component{
 - drawComponent()
 }
 ```
-croc.js
+player.js
 ```
-croc extends Component(){
+player extends Component(){
 - constructor () {}
 - move ()
 }
 ```
 monsters.js
 ```
-enemyMonster extends Component(){
+Monster extends Component(){
 - constructor()
 - move()
-- collisionCroc()
+- collisionPlayer()
 - collisionMarsh()
 }
 ```
 marshmallows.js
 ```
-friendMarsh extends Component(){
+Marsh extends Component(){
 constructor()
 move()
 collisionHouse()
