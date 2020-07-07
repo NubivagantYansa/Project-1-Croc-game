@@ -90,7 +90,7 @@ house extends Component ()
 ```
 ## States e States Transitions
 Definition of the different states and their transition (transition functions)
-
+```
 splashScreen()
 - drawSplashScreen ()
 - addEventListener(startGame)
@@ -107,7 +107,7 @@ gameOver()
 Win()
 - drawWinScreen()
 - addEventListener(playAgain) 
-
+```
 ## Task
 ```
 main - drawSplashScreen(){addeventListener}

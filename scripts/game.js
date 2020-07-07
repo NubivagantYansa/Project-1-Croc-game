@@ -18,25 +18,25 @@ class Game {
         this.ctx = this.canvas.getContext("2d");
         this.animate();
     }
-  
-    animate() {
+
+    animate () {
         this.drawBackground();
-        window.requestAnimationFrame(animate);
+        setInterval(() => {
+            this.clear();
+            this.drawBackground();
+          }, 1000 / 60);
     }
-  
+
+
     drawBackground() {
         this.backgroundImg.src = "imges/backgroundGrass.jpg";
-        this.ctx.drawImage(
-          this.backgroundImg,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-      );
+        this.ctx.drawImage(this.backgroundImg, this.x, this.y, this.width, this.height);
     }
+    
   
     clear() {
         this.ctx.clearRect(this.x, this.y, this.width, this.height);
     }
   }
+
   

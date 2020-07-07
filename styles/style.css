@@ -37,3 +37,7 @@ body button {
 .arrows-img {
     width: 150px;
 }
+
+#canvas {
+    border: 1px black solid;
+}
