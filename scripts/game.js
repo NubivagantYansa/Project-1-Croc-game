@@ -17,7 +17,8 @@ class Game {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
         this.animate();
-        this.drawCharacters();
+        this.drawMonster();
+        this.drawMarsh();
     }
 
     animate () {
@@ -31,49 +32,57 @@ class Game {
             this.player.move();
             
             
-            //monsters 
+            //monsters
             for (let i = 0; i < this.monsters.length; i++) {
                 this.monsters[i].move();
                 this.monsters[i].draw();
                 this.marsh[i].move();
                 this.marsh[i].draw();
                 
-                //if player - monster collision => monster disappears
+                //monster - player collision => monster disappears
                 if (this.player.crashCollision(this.monsters[i])){
                     return this.monsters.splice(i, 1);
+                }
+
+                //monster - marsh collision
+                if (this.monsters[i].crashCollision(this.marsh[i])){
+                    return this.marsh.splice(i, 1)
                 }
 
                 //removes monster from canvas
                 if (this.monsters[i].x < 0) {
                     return this.monsters.splice(i, 1);
                     }
-            
-                if (this.marsh[i].crashCollision(this.monsters[i])){
-                    return this.marsh.splice(i, 1)
-                }
                 
-            //removes marsh from canvas ===> I will have to add here collision with house
-            if (this.marsh[i].y < 0) {
-                    return this.marsh.splice(i, 1);
-                    }
-              }
+                //removes marsh from canvas ===> I will have to add here collision with house
+                if (this.marsh[i].y < 0) {
+                        return this.marsh.splice(i, 1);
+                        }
+            }
     
            }, 1000 / 60);
     }
 
 
-    drawCharacters() { 
+    drawMonster(){
         if (Math.floor(Math.random() * 10) % 2 === 0) { //creates random monsters
-          this.monsters.push(new Monster(this));
-        }
+            this.monsters.push(new Monster(this));
+          }
+          setTimeout(() => {
+            this.drawMonster();
+          }, 1500);
+    }
+
+
+    drawMarsh (){
         if (Math.floor(Math.random() * 10) % 2 === 0) { //creates random marshmallows
             this.marsh.push(new Marsh (this));
           }
-    
-        setTimeout(() => {
-          this.drawCharacters();
-        }, 2000);
+          setTimeout(() => {
+            this.drawMarsh();
+          }, 1500);
     }
+
 
 // customized method to detect collision - to be tested - call  detectInteractions (this.mars, this.monsters, this.player) instead of the for loops in animate()
 
@@ -110,12 +119,12 @@ class Game {
     // }
     // }
 
-    drawBackground() {
+    drawBackground() { //draws background
         this.backgroundImg.src = "imges/backgroundGrass.jpg";
         this.ctx.drawImage(this.backgroundImg, this.x, this.y, this.width, this.height);
     }
     
-    drawPlayer() {
+    drawPlayer() { // draws Croc
         this.player.drawComponent("imges/frame-1.png");
       }
   
