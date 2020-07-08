@@ -30,10 +30,14 @@ class Game {
             this.drawPlayer();
             this.player.move();
             
-            //monsters - player 
+            
+            //monsters 
             for (let i = 0; i < this.monsters.length; i++) {
                 this.monsters[i].move();
                 this.monsters[i].draw();
+                this.marsh[i].move();
+                this.marsh[i].draw();
+                
                 //if player - monster collision => monster disappears
                 if (this.player.crashCollision(this.monsters[i])){
                     return this.monsters.splice(i, 1);
@@ -41,27 +45,22 @@ class Game {
 
                 //removes monster from canvas
                 if (this.monsters[i].x < 0) {
-                    this.monsters.splice(i, 1);
+                    return this.monsters.splice(i, 1);
                     }
-
-              }
-
-            for (let i = 0; i < this.marsh.length; i++) {
-                this.marsh[i].move();
-                this.marsh[i].draw();
-                this.marsh.forEach((marsh, idx) =>{
-                    if (marsh.crashCollision(this.monsters[i])){
-                        return marsh.splice(idx, 1)
-                    }
-                })
             
-                //removes marsh from canvas ===> add here collision with house
-                if (this.marsh[i].y < 0) {
-                    this.marsh.splice(i, 1);
+                if (this.marsh[i].crashCollision(this.monsters[i])){
+                    return this.marsh.splice(i, 1)
+                }
+                
+            //removes marsh from canvas ===> I will have to add here collision with house
+            if (this.marsh[i].y < 0) {
+                    return this.marsh.splice(i, 1);
                     }
               }
+    
            }, 1000 / 60);
     }
+
 
     drawCharacters() { 
         if (Math.floor(Math.random() * 10) % 2 === 0) { //creates random monsters
@@ -76,6 +75,40 @@ class Game {
         }, 2000);
     }
 
+// customized method to detect collision - to be tested - call  detectInteractions (this.mars, this.monsters, this.player) instead of the for loops in animate()
+
+    // detectInteractions (marsh, monster, croc) {
+    //     for (let i = 0; i < this.marsh.length; i++) {
+    //         this.marsh[i].move();
+    //         this.marsh[i].draw();
+    
+    //         for (let j = 0; j < this.monster.length; j++) {
+            
+    //         this.monster[j].move();
+    //         this.monster[j].draw();
+    
+    //         //if player - monster collision => monster disappears
+    //         if (this.croc.crashCollision(this.monster[j])){
+    //             return this.monster.splice(j, 1);
+    //             }
+    
+    //         //if char1 - char2 collision => char1 disappears
+    //         if (this.marsh[i].crashCollision(this.monster[j])){
+    //             return this.marsh[i].splice(i, 1);
+    //         }
+    
+    //         //if no collision char1 removed from canvas
+    //         if (this.marsh[i].y < 0) {
+    //              this.marsh.splice(i, 1);
+    //             }
+    
+    //         //if no collision monster removed from canvas
+    //         if (this.monster[i].x < 0) {
+    //              this.monster.splice(j, 1);
+    //             }
+    // }
+    // }
+    // }
 
     drawBackground() {
         this.backgroundImg.src = "imges/backgroundGrass.jpg";
