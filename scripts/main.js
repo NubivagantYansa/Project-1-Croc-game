@@ -120,14 +120,30 @@ window.onload = () => {
     // drawWinScreen()
 
   //start the Game
+
+
+  
+  callGameOverScreen = () =>{
+    removeScreen();
+    return drawGameOverScreen();
+
+  }
+
+  callWinScreen = () =>{
+    removeScreen();
+    return drawWinScreen();
+  }
+    
+
+
+
+
   drawSplashScreen();
 
   startGame = () => {
     const myGame = new Game();
     myGame.init();
   }
-
-    
 };
   
 

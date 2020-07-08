@@ -2,7 +2,7 @@ class Monster extends Component {
   constructor(game) {
     super(game);
     this.x = 1250;
-    this.y = Math.floor(Math.random() * 440 + 30); //what if I want to use canvas.heigth
+    this.y = Math.floor(Math.random() * 440 + 300); 
     this.width = 100;
     this.height = 100;
     this.img = new Image();
@@ -15,7 +15,7 @@ class Monster extends Component {
 
   move() {
     if (Math.floor(Math.random() * 20) % 3 === 0) {
-      this.x -= 7;
+      this.x -= 5;
     }
   }
 
