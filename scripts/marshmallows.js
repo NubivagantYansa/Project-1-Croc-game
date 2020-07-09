@@ -5,6 +5,7 @@ class Marsh extends Component {
       this.y = 810;
       this.width = 80;
       this.height = 80;
+      this.speed = 3;
       this.img = new Image();
     }
     
@@ -15,7 +16,7 @@ class Marsh extends Component {
   
     move() {
       if (Math.floor(Math.random() * 20) % 3 === 0) { //if created a marsh make it move
-        this.y -= 3;
+        this.y -= this.speed;
       }
     }
 
