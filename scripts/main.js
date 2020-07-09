@@ -126,11 +126,9 @@ window.onload = () => {
         };
   }
 
-
-
-    //uncomment to test the screens
-    // drawGameOverScreen()
-    // drawWinScreen()
+  //uncomment to test the screens
+  // drawGameOverScreen()
+  // drawWinScreen()
 
   //start the Game
 
