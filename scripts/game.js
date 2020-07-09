@@ -20,15 +20,17 @@ class Game {
     }
 
     animate () { //animation function
+        this.clear();
         this.drawBackground();
         this.drawPlayer();
         this.drawHouse();
         this.drawMonster();
         this.drawMarsh();
-        this.addCharacters (this.monsters); //draw/move monsters
-        this.addCharacters (this.marsh); //draw/move marsh
+        this.addCharacters (this.monsters); //draw-move monsters
+        this.addCharacters (this.marsh); //draw-move marsh
         this.monsterCollisionCheck ();
         this.marshCollisionCheck ();
+        this.checkGameIsOver();
 
         
         setInterval(() => {
@@ -37,13 +39,13 @@ class Game {
             this.drawHouse();
             this.drawPlayer();
             this.player.move();
-            this.addCharacters (this.monsters); //draw/move monsters
-            this.addCharacters (this.marsh); //draw/move marsh
             this.monsterCollisionCheck ();
             this.marshCollisionCheck ();
-
+            this.addCharacters (this.monsters); //draw/move monsters
+            this.addCharacters (this.marsh); //draw/move marsh
 
             this.checkGameIsOver();
+
     
            }, 1000 / 60);
     }
@@ -94,13 +96,17 @@ class Game {
         for (let i = 0; i < group.length; i++) {
             group[i].draw();
             group[i].move();
-    }
+        }
     }
   
    crashCollision(char1, char2) {
     
     //if any of those conditions are true there is no collision
-    if (char1.y + char1.height > char2.y + char2.height  || char1.x + char1.width  < char2.x  || char1.y + char1.height  < char2.y || char1.x > char2.x + char2.width ){
+    if (
+        char1.y + char1.height  > char2.y + char2.height +10 //char1 below char2
+        || char1.x + char1.width +10   < char2.x //char 1 on the left side of char 2
+        || char1.y + char1.height  < char2.y + 10 //char 1 above char 2
+        || char1.x > char2.x + char2.width + 10  ){ // char 1 on the right side of char 2
       return false;
     }
     return true;
@@ -115,7 +121,7 @@ class Game {
             
             // 1. monster - player collision => monster disappears
             if (this.crashCollision(this.monsters[i], this.player)){
-                return this.monsters.splice(i, 1);
+                 this.monsters.splice(i, 1);
 
             // 2. monster - marsh collision => game over
             } else if (this.marsh.length > 0){ //if there are marshmallows on the canvas
@@ -124,18 +130,22 @@ class Game {
                 
                     if (this.crashCollision(this.monsters[i],this.marsh[j])){
                     this.marsh.splice(j, 1)
-                        return true;
+                    return true;
                     }
                 }
             }
 
             //3. if no collision happens removes monster from canvas
             else if (this.monsters[i].x < 0) {
-                return this.monsters.splice(i, 1);
+                 this.monsters.splice(i, 1);
+            }
+
+            else {
+                return false;
             }
         }   
+        }
     }
-}
 
     marshCollisionCheck (){ //checks if the marshmallow collides with the house
         
@@ -155,24 +165,12 @@ class Game {
 
     checkGameIsOver() {
         if (this.monsterCollisionCheck ()){ //if monsters collides with marsh the game ends
-            return console.log("game over");
-            //this.GameOver()
+            return console.log("game over") //callGameOverScreen();
         }
-        else if  (this.marshCollisionCheck ()){ // if marshmallows collides with the house you win
-            return console.log("you win");
-            //return this.Winner() ; 
+        else if (this.marshCollisionCheck ()){ // if marshmallows collides with the house you win
+            return console.log("you win") //callWinScreen() ; 
         }
     }
-
-    GameOver () {
-        return callGameOverScreen() //calls the Game OVer Screen from Main
-      }
-
-    Winner() {
-        return callWinScreen(); //calls the Game OVer Screen from Main
-    }
-
-
 }
 
   

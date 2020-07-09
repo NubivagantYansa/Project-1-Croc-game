@@ -85,8 +85,7 @@ window.onload = () => {
       startbtn.innerText = 'Try again';
       document.getElementById('start-button').onclick = () => {
           removeScreen ();
-          drawSplashScreen()
-          startGame()
+          return drawSplashScreen();
       };
   }
       
@@ -109,7 +108,7 @@ window.onload = () => {
 
     document.getElementById('start-button').onclick = () => {
         removeScreen ();
-        drawSplashScreen();
+        return drawSplashScreen();
         };
   }
 
@@ -120,7 +119,6 @@ window.onload = () => {
     // drawWinScreen()
 
   //start the Game
-
 
   
   callGameOverScreen = () =>{
@@ -133,7 +131,6 @@ window.onload = () => {
     removeScreen();
     return drawWinScreen();
   }
-    
 
 
 
