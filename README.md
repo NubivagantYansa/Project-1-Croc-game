@@ -4,8 +4,6 @@
 
 Croc saves Marshland is a game where the player has to move Croc to stop the monsters from colliding with the hairy marshmallows. After 20 seconds, the speed intervals randomize themselves and get quicker for higher difficulty. If you survive 1 minute you win the game. If the monsters get to pass Croc and collide with the Marshmallows, it’s game over.
 
-MVP (DOM - CANVAS)
-
 ## MVP (DOM - CANVAS)
 - Croc starts from the middle and uses the arrows to move horizontally/vertically/diagonally.
 - Random monsters come from the right side of the screen and disappear when they reach the left side.
@@ -41,9 +39,10 @@ game () {
 - init()
 - animate ()
 - drawPlayer ()
-- drawCharacters ()
+- drawMonsters()
+- drawMarsh()
 - drawGingerBHouse ()
-- clearCanvas ()
+- clear()
 - drawBackground ()
 - detectCollision()
 - gameOver ()

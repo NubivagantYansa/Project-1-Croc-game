@@ -1,17 +1,22 @@
 window.onload = () => {
 
-  addElement = (el) => {
+  createContainer = () => {
 
     //create a div container for the elemens of the screen
     let parent = document.getElementById('game-board');
     let divContainer = document.createElement('div');
     parent.appendChild(divContainer);
-    divContainer.setAttribute('id', 'container'); //use for styling
-    
+    divContainer.setAttribute('id', 'style-container'); //use for styling
+    return divContainer
+  }
+
+  addElement = (el) => {
+
     //create child and append it to the div
     let newChild = document.createElement(el);
-    divContainer.appendChild(newChild);
-    return divContainer.lastElementChild //the function returns the new element created
+    let styleCont = document.getElementById('style-container');
+    styleCont.appendChild(newChild);
+    return styleCont.lastElementChild //the function returns the new element created
   };
 
 
@@ -23,12 +28,16 @@ window.onload = () => {
 
 
   removeScreen = () => {
-      document.getElementById('game-board').innerHTML = '';
+      let screen = document.getElementById('style-container');
+      return   screen.parentNode.removeChild(screen);
+      
   };
 
 
 
   drawSplashScreen = () => {
+
+    createContainer();
 
     //heading
     addElement('h1').innerText = 'Croc saves Marshland';
@@ -61,6 +70,7 @@ window.onload = () => {
 
   drawGameScreen = () => { 
 
+    createContainer();
     //creates canvas
     let canvas = addElement('canvas');
     //sets attributes
@@ -70,6 +80,8 @@ window.onload = () => {
 
 
   drawGameOverScreen = () => {
+
+      createContainer();
 
       //headings
       addElement('h1').innerText = 'GAME OVER';
@@ -85,14 +97,15 @@ window.onload = () => {
       startbtn.innerText = 'Try again';
       document.getElementById('start-button').onclick = () => {
           removeScreen ();
-          drawSplashScreen()
-          startGame()
+          return drawSplashScreen();
       };
   }
       
 
   
   drawWinScreen = () => {
+
+    createContainer();
 
     //add headings
     addElement('h1').innerText = 'You are a hero!';
@@ -109,7 +122,7 @@ window.onload = () => {
 
     document.getElementById('start-button').onclick = () => {
         removeScreen ();
-        drawSplashScreen();
+        return drawSplashScreen();
         };
   }
 
@@ -120,14 +133,29 @@ window.onload = () => {
     // drawWinScreen()
 
   //start the Game
+
+  
+  gameOver = () =>{
+    removeScreen();
+    drawGameOverScreen();
+
+  }
+
+  callWinScreen = () =>{
+    removeScreen();
+    drawWinScreen();
+  }
+
+
+
+
   drawSplashScreen();
 
   startGame = () => {
     const myGame = new Game();
     myGame.init();
+    //myGame.passGameOverCallback(gameOver);
   }
-
-    
 };
   
 

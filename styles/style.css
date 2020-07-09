@@ -4,6 +4,9 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background-image: url("../imges/nature-game-background.jpg");
+    background-repeat: cover;
+    background-position: center;
 }
 
 body button {
@@ -25,12 +28,11 @@ body button {
     justify-content: center;
     align-items: center;
     padding: 20px 0px;
-    background-image: url("../imges/backgroundGrass.jpg");
 }
 
 
 .logo-img {
-    width: 70%;
+    height: 70%;
     margin-bottom: 10%;
 }
 
@@ -40,4 +42,9 @@ body button {
 
 #canvas {
     border: 1px black solid;
+}
+
+#style-container{
+    height: 100%;
+    align-items: center;
 }
