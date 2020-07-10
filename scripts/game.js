@@ -18,11 +18,19 @@ class Game {
 
         this.width = 1250; //width of canvas
         this.height = 810; //height of canvas
+
+        // audio
+        this.monsterSound = new Audio ('sounds/squeeze.ogg');
+        this.winSound = new Audio ('sounds/win-song.mp3');
+        this.gameOverSound = new Audio ('sounds/pixie-go.mp3')
+        this.themeSound = new Audio ('sounds/March Theme.mp3');
+
     }
   
     init() { // initiate canvas 
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
+        this.themeSound.play();
         this.animate(); //calls animation function
         
     }
@@ -36,7 +44,7 @@ class Game {
         this.createMonster();
         this.createMarsh();
         
-         const animation = setInterval(() => {
+        const animation = setInterval(() => {
 
             this.clear();
             this.drawBackground();
@@ -63,7 +71,7 @@ class Game {
 
 // DRAWING functions <===============================================================
 
-    drawPlayer() { // draws Croc
+    drawPlayer() { // draws Player
         this.player.drawComponent("imges/frame-1.png");
     }
 
@@ -73,7 +81,7 @@ class Game {
           }
           setTimeout(() => { 
             this.createMonster();
-          }, 1000);
+          }, 500);
 
     }
 
@@ -103,8 +111,6 @@ class Game {
     }
 
 
-// COLLISION functions <===============================================================
-
     addCharacters (group){
         for (let i = 0; i < group.length; i++) {
             group[i].draw();
@@ -112,7 +118,10 @@ class Game {
         }
     }
   
-   checkCollision(char1, char2) {
+// COLLISION functions <===============================================================
+
+
+   detectCollision(char1, char2) { //helper function to check if collision happens (bolean) between two characters
   
     const char1Right = char1.x + char1.width;
     const char1Left = char1.x;
@@ -137,37 +146,40 @@ class Game {
     }
 
 
-    monsterCollisionCheck (){ // checks if monsters collides with player (disappear) or marshmallow (game over)
+    monsterCollisionCheck (){ // checks if a monster collides with Player or a marshmallow 
         
         if (this.monsters.length !== 0){
 
         for (let i = 0; i < this.monsters.length; i++) {
           
-            // 1. monster - player collision => monster disappears
-            if (this.checkCollision(this.monsters[i], this.player)){
+            // 1. monster - Player collision => monster disappears
+            if (this.detectCollision(this.monsters[i], this.player)){
                 this.score += 1;
                 console.log("monster killed");
                 console.log(this.score);
                 this.updateScore ()
+                this.monsterSound.play();
                 return this.monsters.splice(i, 1);
 
                  
-            //2. if no collision happens removes monster from canvas
+            //2. when the monster reaches the end of the canvas it's removed from the game
             } else if (this.monsters[i].x < 0) {
-                 console.log("end of canvas monster dissappears");
+                 console.log("end of canvas, monster dissappears");
+                 //this.preload();
                  return this.monsters.splice(i, 1);
 
 
             // 3. monster - marsh collision => game over
-            } else if (this.marsh.length !== 0){ //if there are marshmallows on the canvas
+            } else if (this.marsh.length !== 0){ // if there are marshmallows in the canvas
                 
-                for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each of them
+                for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each marsh in canvas
                 
-                    if (this.checkCollision(this.marsh[j], this.monsters[i])){
+                    if (this.detectCollision(this.marsh[j], this.monsters[i])){
                         console.log("marsh has been killed");
                         this.marsh.splice(j, 1);
                         return this.gameIsOver = true;
-                    } return false
+                    } 
+                    return false
                 }
             }
         } 
@@ -175,15 +187,14 @@ class Game {
     
     }
 
-    marshHouseCollisionCheck (){ //checks if the marshmallow collides with the house
+    marshHouseCollisionCheck (){ // checks if the marshmallow collides with the house (bolean)
         
-        if (this.marsh.length !== 0)
-        
-        {
+        if (this.marsh.length !== 0){
+
             for (let i = 0; i < this.marsh.length; i++) {
             
-                //marsh - gingerbread house collision ==> win game
-                if (this.checkCollision(this.gingerbHouse, this.marsh[i])){
+                // marsh - gingerbread house collision ==> win game
+                if (this.detectCollision(this.gingerbHouse, this.marsh[i])){
                     console.log("marsh safe");
                     this.marsh.splice(i, 1);
                     return this.gameIsWon = true;
@@ -193,14 +204,15 @@ class Game {
     }
     }
 
-    updateScore (){
-  document.querySelector('.value').innerText = this.score;
-}
+    updateScore (){ // updatesthe score in the heading
+        document.querySelector('.value').innerText = this.score;
+    }
+
 
 // END GAME functions <===============================================================
 
     checkGameIsOver() {
-        if (this.gameIsOver){ //if monsters collides with marsh the game ends
+        if (this.gameIsOver){ // if monster collides with marsh the game ends
             return this.gameOver();
         }
         else if (this.gameIsWon){ // if marshmallows collides with the house you win
@@ -211,6 +223,7 @@ class Game {
     gameOver(){
         console.log("game over");
         this.gameStop = true;
+        this.gameOverSound.play()
         return callGameOver();
         //sounds
     }
@@ -219,9 +232,10 @@ class Game {
     gameWin(){
         console.log("game won");
         this.gameStop = true;
-        return callWonGame();
+        this.themeSound.pause();
+        this.winSound.play();
+        callWonGame();
+        return this.updateScore ();
         //sounds
     }
 }
-
-  

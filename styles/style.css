@@ -1,3 +1,4 @@
+
 body {
     padding: 0;
     text-align: center;
@@ -56,15 +57,23 @@ body button {
     align-items: center;
   }
   
-#style-container .score {
+.score {
     flex: 1;
+    font-size: 70px;
   }
+
+.win-score{
+    flex: 1;
+    font-size: 70px;
+}
   
-#style-container .label {
+.label {
     font-weight: bold;
+    font-size: 70px;
   }
   
-#style-container .value {
+.value {
     font-style: italic;
+    font-size: 70px;
   }
   

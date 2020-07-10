@@ -72,6 +72,8 @@ window.onload = () => {
     console.log('draw game screen');
 
     createContainer();
+
+    //scoreboard
     let scoreBoard = buildScoreBoard(`
       <header>
         <div class="score">
@@ -92,7 +94,7 @@ window.onload = () => {
     setAttributes (canvas, {'id': 'canvas', 'width': '1250px', 'height': '810px'});
   }
 
-  drawGameOverScreen = (score) => {
+  drawGameOverScreen = () => {
     console.log('draw game over screen')
 
       createContainer();
@@ -110,13 +112,29 @@ window.onload = () => {
       startbtn.innerText = 'Try again';
       document.getElementById('start-button').onclick = () => {
           removeScreen ();
-          return drawSplashScreen();
+          location.reload();
+          drawSplashScreen();
       };
   }
   
   drawWinScreen = () => {
     console.log('draw win screen')
     createContainer();
+
+        //scoreboard
+        let scoreBoard = buildScoreBoard(`
+        
+          <div class="win - score">
+            <span class="label">Defeated monsters:</span>
+            <span class="value">0</span>
+          </div>
+        
+    `);
+      
+      let styleCont = document.getElementById('style-container');
+      styleCont.appendChild(scoreBoard);
+
+
     //add headings
     addElement('h1').innerText = 'You are a HERO!';
     addElement('h3').innerText = 'The Marsh is safe and sound in the gingerbread house';
@@ -132,13 +150,10 @@ window.onload = () => {
 
     document.getElementById('start-button').onclick = () => {
         removeScreen ();
-        return drawSplashScreen();
+        location.reload();
+        drawSplashScreen();
         };
   }
-
-  //uncomment to test the screens
-  // drawGameOverScreen()
-  // drawWinScreen()
 
 
   //Setting Game State ==============================

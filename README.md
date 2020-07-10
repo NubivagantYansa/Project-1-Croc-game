@@ -27,6 +27,7 @@ Croc saves Marshland is a game where the player has to move Croc to stop the mon
 ## Data structure
 ### main.js
 ```
+removeScreen (){}
 drawSplashScreen(){}
 drawGameScreen(){}
 drawGameOverScreen(){}
@@ -39,21 +40,25 @@ game () {
 - init()
 - animate ()
 - drawPlayer ()
-- drawMonsters()
-- drawMarsh()
-- drawGingerBHouse ()
+- createMonsters()
+- createMarsh()
+- drawHouse ()
 - clear()
 - drawBackground ()
+- addChacters ()
 - detectCollision()
+- monsterCollisionCheck()
+- marshHouseCollisionCheck()
+- updateScore ()
+- checkGameIsOver()
 - gameOver ()
-- winner ()
+- gameWin ()
 }
 ```
 component.js
 ```
 component{
 - constructor()
-- boundaries()
 - drawComponent()
 }
 ```
@@ -68,18 +73,16 @@ monsters.js
 ```
 Monster extends Component(){
 - constructor()
-- move()
-- collisionPlayer()
-- collisionMarsh()
+- draw()
+- move ()
 }
 ```
 marshmallows.js
 ```
 Marsh extends Component(){
-constructor()
-move()
-collisionHouse()
-collisionMonster()
+- constructor()
+- draw()
+- move ()
 }
 ```
 gingerbHouse.js
@@ -89,52 +92,44 @@ house extends Component ()
 ## States e States Transitions
 Definition of the different states and their transition (transition functions)
 ```
-splashScreen()
-- drawSplashScreen ()
-- addEventListener(startGame)
-  
+
 startGame()
 - drawGameScreen()
 - game.init()
 - game.start()
   
-gameOver()
+callGameOver()
 - drawGameOverScreen()
-- addEventListener(tryAgain) 
 
-Win()
+CallWonGame()
 - drawWinScreen()
-- addEventListener(playAgain) 
+
 ```
-## Task
+## Tasks
 ```
 main - drawSplashScreen(){addeventListener}
-main - drawGameScreen()
-game - constructor ()
-component - component()
+main - removeScreen (){}
+main - drawSplashScreen(){}
+main - drawGameScreen(){}
+main - drawGameOverScreen(){}
+main - drawWinScreen(){}
+game - constructor()
 game - init()
 game - animate ()
+game - drawPlayer ()
+game - createMonsters()
+game - createMarsh()
+game - drawHouse ()
+game - clear()
 game - drawBackground ()
-player - player
-game - drawCroc ()
-game - clearCanvas ()
-monster - enemyMonster ()
-monster - constructor()
-monster	- move()
-game - drawMonsters ()
-game - detectCollision ()
-monster	- collision()
-marshmallows - friendMarsh ()
-marshmallows  - constructor()
-marshmallows - move()
-game - drawMarshs ()
-gingerBHouse - gingerBHouse ()
-game - drawGingerBHouse ()
-marshmallows - collision()
-main - drawGameOverScreen(){addeventListener}
+game - addChacters ()
+game - detectCollision()
+game - monsterCollisionCheck()
+game - marshHouseCollisionCheck()
+game - updateScore ()
+game - checkGameIsOver()
 game - gameOver ()
-main - drawWinScreen(){addeventListener}
-game - winner ()
+game - gameWin ()
 ```
 ## Links
 
