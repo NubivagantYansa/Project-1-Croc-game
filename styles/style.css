@@ -7,6 +7,7 @@ body {
     background-image: url("../imges/nature-game-background.jpg");
     background-repeat: cover;
     background-position: center;
+    font-size: 40px;
 }
 
 body button {
@@ -48,3 +49,22 @@ body button {
     height: 100%;
     align-items: center;
 }
+
+#style-container header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+  }
+  
+#style-container .score {
+    flex: 1;
+  }
+  
+#style-container .label {
+    font-weight: bold;
+  }
+  
+#style-container .value {
+    font-style: italic;
+  }
+  

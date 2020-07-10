@@ -1,6 +1,5 @@
 window.onload = () => {
 
-
   // HELPERS for DOM manipulation =====================
 
   createContainer = () => { //create a div container for the elemens of the screen
@@ -25,7 +24,12 @@ window.onload = () => {
         el.setAttribute(key, attrs[key]);
       }
     }
-
+  
+  buildScoreBoard = (htmlString) => {
+      let div = document.createElement('div');
+      div.innerHTML = htmlString;
+      return div.children[0];
+    };
 
   // SCREENS ========================================================
 
@@ -36,6 +40,7 @@ window.onload = () => {
   };
 
   drawSplashScreen = () => {
+    console.log('draw spalsh screen')
 
     createContainer();
     //heading
@@ -64,15 +69,31 @@ window.onload = () => {
   };
 
   drawGameScreen = () => { 
+    console.log('draw game screen');
 
     createContainer();
+    let scoreBoard = buildScoreBoard(`
+      <header>
+        <div class="score">
+          <span class="label">Defeated monsters:</span>
+          <span class="value">0</span>
+        </div>
+      </header>
+  `);
+    
+    let styleCont = document.getElementById('style-container');
+    styleCont.appendChild(scoreBoard);
+
+    
+
     //creates canvas
     let canvas = addElement('canvas');
     //sets attributes
     setAttributes (canvas, {'id': 'canvas', 'width': '1250px', 'height': '810px'});
   }
 
-  drawGameOverScreen = () => {
+  drawGameOverScreen = (score) => {
+    console.log('draw game over screen')
 
       createContainer();
       //headings
@@ -94,11 +115,11 @@ window.onload = () => {
   }
   
   drawWinScreen = () => {
-
+    console.log('draw win screen')
     createContainer();
     //add headings
-    addElement('h1').innerText = 'You are a hero!';
-    addElement('h3').innerText = 'All the Marshs are safe and sound in the gingerbread house';
+    addElement('h1').innerText = 'You are a HERO!';
+    addElement('h3').innerText = 'The Marsh is safe and sound in the gingerbread house';
 
     //Croc image + attribute
     let crocWin =  addElement('img');
@@ -124,12 +145,14 @@ window.onload = () => {
 
   
   callGameOver = () =>{
+    console.log('called game over')
     removeScreen();
     drawGameOverScreen();
 
   }
 
   callWonGame = () =>{
+    console.log('called won game')
     removeScreen();
     drawWinScreen();
   }
