@@ -1,8 +1,9 @@
 window.onload = () => {
 
-  createContainer = () => {
 
-    //create a div container for the elemens of the screen
+  // HELPERS for DOM manipulation =====================
+
+  createContainer = () => { //create a div container for the elemens of the screen
     let parent = document.getElementById('game-board');
     let divContainer = document.createElement('div');
     parent.appendChild(divContainer);
@@ -19,7 +20,6 @@ window.onload = () => {
     return styleCont.lastElementChild //the function returns the new element created
   };
 
-
   setAttributes = (el, attrs) =>{
       for(let key in attrs) {
         el.setAttribute(key, attrs[key]);
@@ -27,18 +27,17 @@ window.onload = () => {
     }
 
 
+  // SCREENS ========================================================
+
   removeScreen = () => {
       let screen = document.getElementById('style-container');
       return   screen.parentNode.removeChild(screen);
       
   };
 
-
-
   drawSplashScreen = () => {
 
     createContainer();
-
     //heading
     addElement('h1').innerText = 'Croc saves Marshland';
 
@@ -63,8 +62,6 @@ window.onload = () => {
     setAttributes (ArrowsImg, {'src': 'imges/arrows.png', 'alt': 'arrows-logo', 'class': 'logo-img'})
 
   };
-      
-
 
   drawGameScreen = () => { 
 
@@ -75,12 +72,9 @@ window.onload = () => {
     setAttributes (canvas, {'id': 'canvas', 'width': '1250px', 'height': '810px'});
   }
 
-
-
   drawGameOverScreen = () => {
 
       createContainer();
-
       //headings
       addElement('h1').innerText = 'GAME OVER';
       addElement('h3').innerText = 'The monster army won this round!';
@@ -98,13 +92,10 @@ window.onload = () => {
           return drawSplashScreen();
       };
   }
-      
-
   
   drawWinScreen = () => {
 
     createContainer();
-
     //add headings
     addElement('h1').innerText = 'You are a hero!';
     addElement('h3').innerText = 'All the Marshs are safe and sound in the gingerbread house';
@@ -128,7 +119,8 @@ window.onload = () => {
   // drawGameOverScreen()
   // drawWinScreen()
 
-  //start the Game
+
+  //Setting Game State ==============================
 
   
   callGameOver = () =>{
@@ -146,11 +138,10 @@ window.onload = () => {
   drawSplashScreen();
 
   startGame = () => {
-    removeScreen();
-    drawGameScreen ();
-    const myGame = new Game();
-    myGame.init();
-    //myGame.passGameOverCallback(gameOver);
+    removeScreen(); //clear the screen
+    drawGameScreen (); //draw the canvas for the game
+    const myGame = new Game(); //create instance for Game
+    myGame.init(); //initiate game
   }
 };
   

@@ -21,6 +21,7 @@ class Game {
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
         this.animate(); //calls animation function
+        
     }
 
 
@@ -196,7 +197,8 @@ class Game {
 
     gameOver(){
         console.log("game over");
-        return this.gameStop = true;
+        this.gameStop = true;
+        callGameOver();
     
         //this.onGameOverCallback();
         //sounds
@@ -208,7 +210,8 @@ class Game {
 
     gameWin(){
         console.log("game won");
-        return this.gameStop = true;
+        this.gameStop = true;
+        callWonGame();
 
         //flags
         //sounds
