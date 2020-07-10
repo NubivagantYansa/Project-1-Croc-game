@@ -52,8 +52,6 @@ window.onload = () => {
     startbtn.innerText = 'Start Game';
 
     document.getElementById('start-button').onclick = () => {
-        removeScreen ();
-        drawGameScreen ();
         startGame();
     };
 
@@ -150,6 +148,8 @@ window.onload = () => {
   drawSplashScreen();
 
   startGame = () => {
+    removeScreen();
+    drawGameScreen ();
     const myGame = new Game();
     myGame.init();
     //myGame.passGameOverCallback(gameOver);

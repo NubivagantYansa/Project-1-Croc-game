@@ -9,6 +9,9 @@ class Game {
         this.gingerbHouse = new House(this, 0, 0, 280, 300); //creates new instance of house
         this.x = 0;
         this.y = 0;
+        // flags end game
+        this.gameOver = false;
+        this.gameWin = false;
         this.width = 1250; //width of canvas
         this.height = 810; //height of canvas
     }
@@ -19,6 +22,7 @@ class Game {
         this.animate(); //calls animation function
     }
 
+
     animate () { //animation function
         console.log("animation on")
         this.drawBackground();
@@ -27,7 +31,7 @@ class Game {
         this.drawMonster();
         this.drawMarsh();
         
-        setInterval(() => {
+         var animation = setInterval(() => {
             
             this.clear();
             this.drawBackground();
@@ -39,9 +43,10 @@ class Game {
             this.monsterCollisionCheck ();
             this.marshHouseCollisionCheck ();
             this.checkGameIsOver();
-          
+
+            if (this.gameOver) clearInterval(animation) 
     
-           }, 1000 / 60);
+        }, 1000 / 60);
     }
 
 // DRAWING functions <===============================================================
@@ -56,7 +61,7 @@ class Game {
           }
           setTimeout(() => { 
             this.drawMonster();
-          }, 1500);
+          }, 2000);
     }
 
 
@@ -138,22 +143,20 @@ class Game {
 
 
             // 3. monster - marsh collision => game over
-            }else if (this.marsh.length !== 0){ //if there are marshmallows on the canvas
+            } else if (this.marsh.length !== 0){ //if there are marshmallows on the canvas
                 
                 for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each of them
                 
                     if (this.checkCollision(this.marsh[j], this.monsters[i])){
                         console.log("killed marsh");
                         this.marsh.splice(j, 1);
-                        return true;
-                    }
+                        return this.gameOver = true;
+                    } return false
                 }
             }
-            else {
-                return false;
-            }
-        }   
+        } 
         }
+    
     }
 
     marshHouseCollisionCheck (){ //checks if the marshmallow collides with the house
@@ -165,8 +168,9 @@ class Game {
                 if (this.checkCollision(this.gingerbHouse, this.marsh[i])){
                     console.log("marsh safe");
                     this.marsh.splice(i, 1);
-                    return true;
+                    return this.gameWin = true;
                 }
+            return false
         }
     }
     }
@@ -176,27 +180,30 @@ class Game {
 // END GAME functions <===============================================================
 
     checkGameIsOver() {
-        if (this.monsterCollisionCheck ()){ //if monsters collides with marsh the game ends
-            return console.log("game over") //callGameOverScreen();
+        if (this.gameOver){ //if monsters collides with marsh the game ends
+        console.log("game over");
+            return gameOver();
         }
-        else if (this.marshHouseCollisionCheck ()){ // if marshmallows collides with the house you win
+        else if (this.gameWin){ // if marshmallows collides with the house you win
+            
             return console.log("you win") //callWinScreen() ; 
         }
     }
 
-    // gameOver(){
-    //     this.onGameOverCallback();
-    //     //sounds
-    // }
+    gameOver(){
 
-    // passGameOverCallback = (gameOver) => {
-    //     this.onGameOverCallback = gameOver;
-    //   };
+        this.onGameOverCallback();
+        //sounds
+    }
 
-    // GameWin(){
-    //     //flags
-    //     //sounds
-    // }
+    passGameOverCallback = (gameOver) => {
+        this.onGameOverCallback = gameOver;
+      };
+
+    GameWin(){
+        //flags
+        //sounds
+    }
 }
 
   
