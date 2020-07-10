@@ -131,18 +131,16 @@ window.onload = () => {
   //start the Game
 
   
-  gameOver = () =>{
+  callGameOver = () =>{
     removeScreen();
     drawGameOverScreen();
 
   }
 
-  callWinScreen = () =>{
+  callWonGame = () =>{
     removeScreen();
     drawWinScreen();
   }
-
-
 
 
   drawSplashScreen();
