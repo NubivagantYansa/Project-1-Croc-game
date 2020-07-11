@@ -73,7 +73,7 @@ window.onload = () => {
 
     createContainer();
 
-    //scoreboard
+    //creates scoreboard
     let scoreBoard = buildScoreBoard(`
       <header>
         <div class="score">
@@ -86,11 +86,10 @@ window.onload = () => {
     let styleCont = document.getElementById('style-container');
     styleCont.appendChild(scoreBoard);
 
-    
-
-    //creates canvas
+  
+    // creates canvas
     let canvas = addElement('canvas');
-    //sets attributes
+    // sets attributes
     setAttributes (canvas, {'id': 'canvas', 'width': '1250px', 'height': '810px'});
   }
 
@@ -98,7 +97,7 @@ window.onload = () => {
     console.log('draw game over screen')
 
       createContainer();
-      //headings
+      // headings
       addElement('h1').innerText = 'GAME OVER';
       addElement('h3').innerText = 'The monster army won this round!';
 
@@ -106,13 +105,12 @@ window.onload = () => {
       let crocImg = addElement('img');
       setAttributes (crocImg, {'src': 'imges/croc-faint.png', 'alt': 'croc-logo', 'class': 'logo-img'})
 
-      //button
+      // button
       let startbtn = addElement('button');
       startbtn.setAttribute('id', 'start-button');
       startbtn.innerText = 'Try again';
       document.getElementById('start-button').onclick = () => {
           removeScreen ();
-          location.reload();
           drawSplashScreen();
       };
   }
@@ -121,7 +119,7 @@ window.onload = () => {
     console.log('draw win screen')
     createContainer();
 
-        //scoreboard
+        // creates scoreboard
         let scoreBoard = buildScoreBoard(`
         
           <div class="win - score">
@@ -135,41 +133,40 @@ window.onload = () => {
       styleCont.appendChild(scoreBoard);
 
 
-    //add headings
+    // add headings
     addElement('h1').innerText = 'You are a HERO!';
     addElement('h3').innerText = 'The Marsh is safe and sound in the gingerbread house';
 
-    //Croc image + attribute
+    // Croc image + attribute
     let crocWin =  addElement('img');
     setAttributes (crocWin, {'src': 'imges/croc-jump.png', 'alt': 'croc-logo', 'class': 'logo-img'})
 
-    //button
+    // button
     let playAgainbtn = addElement('button')
     playAgainbtn.setAttribute('id', 'start-button')
     playAgainbtn.innerText = 'Play Again';
 
     document.getElementById('start-button').onclick = () => {
         removeScreen ();
-        location.reload();
         drawSplashScreen();
         };
   }
 
 
-  //Setting Game State ==============================
+  // Setting Game State ==============================
 
   
   callGameOver = () =>{
     console.log('called game over')
     removeScreen();
-    drawGameOverScreen();
+    return drawGameOverScreen();
 
   }
 
   callWonGame = () =>{
     console.log('called won game')
     removeScreen();
-    drawWinScreen();
+    return drawWinScreen();
   }
 
 

@@ -20,19 +20,18 @@ class Game {
         this.height = 810; //height of canvas
 
         // audio
-        this.monsterSound = new Audio ('sounds/squeeze.ogg');
-        this.winSound = new Audio ('sounds/win-song.mp3');
-        this.gameOverSound = new Audio ('sounds/pixie-go.mp3')
-        this.themeSound = new Audio ('sounds/March Theme.mp3');
+        // this.monsterSound = new Audio ('sounds/squeeze.ogg');
+        // this.winSound = new Audio ('sounds/win-song.mp3');
+        // this.gameOverSound = new Audio ('sounds/pixie-go.mp3')
+        // this.themeSound = new Audio ('sounds/March Theme.mp3');
 
     }
   
     init() { // initiate canvas 
         this.canvas = document.getElementById("canvas");
         this.ctx = this.canvas.getContext("2d");
-        this.themeSound.play();
-        this.animate(); //calls animation function
-        
+        // this.themeSound.play();
+        this.animate(); //calls animation function   
     }
 
 
@@ -59,7 +58,7 @@ class Game {
 
             // stops the game if you win or lose
             if (this.gameStop) {
-                const delayInMilliseconds = 100; 
+                const delayInMilliseconds = 50; 
                     setTimeout(() => {
                         console.log('stop the game');
                         clearInterval(animation); 
@@ -82,7 +81,6 @@ class Game {
           setTimeout(() => { 
             this.createMonster();
           }, 500);
-
     }
 
     createMarsh (){ 
@@ -148,7 +146,7 @@ class Game {
 
     monsterCollisionCheck (){ // checks if a monster collides with Player or a marshmallow 
         
-        if (this.monsters.length !== 0){
+       // if (this.monsters.length !== 0){
 
         for (let i = 0; i < this.monsters.length; i++) {
           
@@ -157,15 +155,14 @@ class Game {
                 this.score += 1;
                 console.log("monster killed");
                 console.log(this.score);
-                this.updateScore ()
-                this.monsterSound.play();
+                this.updateScore ();
+                // this.monsterSound.play();
                 return this.monsters.splice(i, 1);
 
                  
             //2. when the monster reaches the end of the canvas it's removed from the game
             } else if (this.monsters[i].x < 0) {
                  console.log("end of canvas, monster dissappears");
-                 //this.preload();
                  return this.monsters.splice(i, 1);
 
 
@@ -179,11 +176,11 @@ class Game {
                         this.marsh.splice(j, 1);
                         return this.gameIsOver = true;
                     } 
-                    return false
+                    return false;
                 }
             }
         } 
-        }
+        //}
     
     }
 
@@ -205,6 +202,7 @@ class Game {
     }
 
     updateScore (){ // updatesthe score in the heading
+        console.log("score updated");
         document.querySelector('.value').innerText = this.score;
     }
 
@@ -223,19 +221,18 @@ class Game {
     gameOver(){
         console.log("game over");
         this.gameStop = true;
-        this.gameOverSound.play()
+        // this.gameOverSound.play();
         return callGameOver();
-        //sounds
+       
     }
 
 
     gameWin(){
         console.log("game won");
         this.gameStop = true;
-        this.themeSound.pause();
-        this.winSound.play();
+        // this.themeSound.pause();
+        // this.winSound.play();
         callWonGame();
         return this.updateScore ();
-        //sounds
     }
 }
