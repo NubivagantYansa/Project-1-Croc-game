@@ -83,12 +83,12 @@ class Game {
 
         if (Math.floor(Math.random() * 20) % 2 === 0) {
             this.monsters.push(new Monster(this));
-            //console.log(this.monsters)
+            console.log(this.monsters)
         
           }
           setTimeout(() => { 
             this.createMonster();
-          }, 1000);
+          }, 500);
         }
     }
 
@@ -151,6 +151,7 @@ class Game {
     }
 
     checkAllCollisions(){
+        //this.monsterInsideCanvasCheck(); 
         this.monsterMarshCollisionCheck();
         this.monsterPlayerCollisionCheck ();
         this.monsterMarshCollisionCheck();
@@ -164,14 +165,18 @@ class Game {
                 this.score += 1;
                 this.updateScore ();
                 this.monsterSound.play();
+                this.monsters.splice(i, 1);
+                console.log(`after player coll ${this.monsters[i]}`)
+            } else if (this.monsters[i].x < 0) {
                 return this.monsters.splice(i, 1);
-            } 
+             
+        }
         }
     }
 
     monsterMarshCollisionCheck(){
         for (let i = 0; i < this.monsters.length; i++) {
-        if (this.marsh.length !== 0){ // if there are marshmallows in the canvas
+            if (this.marsh.length !== 0){ // if there are marshmallows in the canvas
                 
             for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each marsh in canvas
                     
@@ -184,13 +189,16 @@ class Game {
      }
     }
 
-    monsterInsideCanvasCheck() {
-        for (let i = 0; i < this.monsters.length; i++) {
-        if (this.monsters[i].x < 0) {
-                 return this.monsters.splice(i, 1);
-        }
-    }
-    }
+    // monsterInsideCanvasCheck() {
+      
+    //     for (let i = 0; i < this.monsters.length; i++) {
+
+    //     if (this.monsters[i].x < 0) {
+    //             this.monsters.splice(i, 1);
+    //              return console.log(`monsters after canvas collision ${this.monsters}`)
+    //     }
+    //     }
+    // }
 
     marshHouseCollisionCheck (){ // checks if the marshmallow collides with the house (bolean)
         
