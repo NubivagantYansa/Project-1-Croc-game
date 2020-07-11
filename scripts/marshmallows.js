@@ -15,7 +15,7 @@ class Marsh extends Component {
     }
   
     move() {
-      if (Math.floor(Math.random() * 20) % 3 === 0) { //if created a marsh make it move
+      if (Math.floor(Math.random() * 20) % 3 === 0) { 
         this.y -= this.speed;
       }
     }

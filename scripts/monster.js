@@ -15,7 +15,7 @@ class Monster extends Component {
   }
 
   move() {
-    if (Math.floor(Math.random() * 20) % 3 === 0) {
+    if (Math.floor(Math.random() * 20) % 3 === 0) { //moves the monster randomly
       this.x -= this.speed;
     }
   }

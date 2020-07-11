@@ -40,7 +40,6 @@ window.onload = () => {
   };
 
   drawSplashScreen = () => {
-    console.log('draw spalsh screen')
 
     createContainer();
     //heading
@@ -69,7 +68,6 @@ window.onload = () => {
   };
 
   drawGameScreen = () => { 
-    console.log('draw game screen');
 
     createContainer();
 
@@ -94,7 +92,6 @@ window.onload = () => {
   }
 
   drawGameOverScreen = () => {
-    console.log('draw game over screen')
 
       createContainer();
       // headings
@@ -111,12 +108,12 @@ window.onload = () => {
       startbtn.innerText = 'Try again';
       document.getElementById('start-button').onclick = () => {
           removeScreen ();
+          location.reload();
           drawSplashScreen();
       };
   }
   
   drawWinScreen = () => {
-    console.log('draw win screen')
     createContainer();
 
         // creates scoreboard
@@ -148,6 +145,7 @@ window.onload = () => {
 
     document.getElementById('start-button').onclick = () => {
         removeScreen ();
+        location.reload();
         drawSplashScreen();
         };
   }
@@ -157,14 +155,12 @@ window.onload = () => {
 
   
   callGameOver = () =>{
-    console.log('called game over')
     removeScreen();
     return drawGameOverScreen();
 
   }
 
   callWonGame = () =>{
-    console.log('called won game')
     removeScreen();
     return drawWinScreen();
   }
