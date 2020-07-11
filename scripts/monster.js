@@ -5,7 +5,7 @@ class Monster extends Component {
     this.y = Math.floor(Math.random() * 440 + 250); 
     this.width = 100;
     this.height = 100;
-    this.speed = 5;
+    this.speed = 7;
     this.img = new Image();
   }
   
@@ -15,7 +15,7 @@ class Monster extends Component {
   }
 
   move() {
-    if (Math.floor(Math.random() * 20) % 3 === 0) {
+    if (Math.floor(Math.random() * 20) % 3 === 0) { //moves the monster randomly
       this.x -= this.speed;
     }
   }

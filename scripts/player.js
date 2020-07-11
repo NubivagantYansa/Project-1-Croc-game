@@ -23,7 +23,7 @@ class Player extends Component {
               break;
           }
         }
-      };
+      }
     }
   
 }
