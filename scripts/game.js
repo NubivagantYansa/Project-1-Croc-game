@@ -7,9 +7,13 @@ class Game {
         this.monsters = []; //contains monsters' details on canvas 
         this.marsh = []; //contains marshmallows' details on canvas 
         this.gingerbHouse = new House(this, 0, 0, 280, 300); //creates new instance of house
-        this.score = 0;
+        this.scoreMonster = 0;
+        this.scoreMarsh = 0;
         this.x = 0;
         this.y = 0;
+
+        // Countdown timer (100 = about 30 seconds)
+        this.timer = 100;
 
         // flags end game
         this.gameIsOver = false;
@@ -37,18 +41,17 @@ class Game {
 
 
     animate () { //animation function
-        //console.log()("animation on")
+     
         this.drawBackground();
         this.drawPlayer();
         this.drawHouse();
         this.createMonster();
         this.createMarsh();
 
-        
-        
 
         const animation = setInterval(() => {
-          
+            if (!this.gameStop){
+            this.timer -= 0.05;
             this.clear();
             this.drawBackground();
             this.drawHouse();
@@ -58,7 +61,9 @@ class Game {
             this.addCharacters (this.marsh); //draw-move marsh
 
             this.checkAllCollisions(); //collision checks
+            this.updateScoreBoard();
             this.checkGameIsOver();  //check if the game is over
+            }
 
             // stops the game if you win or lose
             if (this.gameStop) {
@@ -72,7 +77,7 @@ class Game {
 }
 
 
-// DRAWING functions <===============================================================
+// DRAWING functions: draw, create, add characters to canvas <===============================================================
 
     drawPlayer() { // draws Player
         this.player.drawComponent("imges/frame-1.png");
@@ -83,23 +88,29 @@ class Game {
 
         if (Math.floor(Math.random() * 20) % 2 === 0) {
             this.monsters.push(new Monster(this));
-            console.log(this.monsters)
-        
-          }
+        }
           setTimeout(() => { 
             this.createMonster();
-          }, 500);
+          }, 300);
         }
     }
 
     createMarsh (){ 
-        while (this.marsh.length < 1 ){
+        if (!this.gameStop){
+
         if (Math.floor(Math.random() * 10) % 2 === 0) { //creates random marshmallows
             this.marsh.push(new Marsh (this)); //push marshmallow in the array
-          }
+        }
          setTimeout(() => {
             this.createMarsh();
           }, 1000);
+        }
+    }
+
+    addCharacters (group){
+        for (let i = 0; i < group.length; i++) {
+            group[i].draw();
+            group[i].move();
         }
     }
 
@@ -116,17 +127,11 @@ class Game {
         this.ctx.clearRect(this.x, this.y, this.width, this.height); 
     }
 
-    addCharacters (group){
-        for (let i = 0; i < group.length; i++) {
-            group[i].draw();
-            group[i].move();
-        }
-    }
   
 // COLLISION functions <===============================================================
 
 
-   detectCollision(char1, char2) { //helper function to check if collision happens (bolean) between two characters
+   detectCollision(char1, char2) { //helper function to check if collision happens between two characters
   
     const char1Right = char1.x + char1.width;
     const char1Left = char1.x;
@@ -150,101 +155,99 @@ class Game {
         return false;
     }
 
-    checkAllCollisions(){
-        //this.monsterInsideCanvasCheck(); 
+    checkAllCollisions(){ //helper function to group collisions 
         this.monsterMarshCollisionCheck();
         this.monsterPlayerCollisionCheck ();
         this.monsterMarshCollisionCheck();
         this.marshHouseCollisionCheck ();
     }
 
-    monsterPlayerCollisionCheck (){ // checks if a monster collides with Player or a marshmallow 
+    monsterPlayerCollisionCheck (){ // checks if a monster collides with Player 
         for (let i = 0; i < this.monsters.length; i++) {
             
             if (this.detectCollision(this.monsters[i], this.player)){
-                this.score += 1;
-                this.updateScore ();
+                this.scoreMonster += 1;
                 this.monsterSound.play();
-                this.monsters.splice(i, 1);
-                console.log(`after player coll ${this.monsters[i]}`)
+                return this.monsters.splice(i, 1);
+
             } else if (this.monsters[i].x < 0) {
                 return this.monsters.splice(i, 1);
-             
-        }
+            }
         }
     }
 
-    monsterMarshCollisionCheck(){
+    monsterMarshCollisionCheck(){// checks if a monster collides with a marshmallow 
         for (let i = 0; i < this.monsters.length; i++) {
             if (this.marsh.length !== 0){ // if there are marshmallows in the canvas
                 
-            for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each marsh in canvas
-                    
-                if (this.detectCollision(this.marsh[j], this.monsters[i])){
-                    this.marsh.splice(j, 1);
-                    return this.gameIsOver = true;
-                } 
+                for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each marsh in canvas
+                        
+                    if (this.detectCollision(this.marsh[j], this.monsters[i])){
+                        return this.marsh.splice(j, 1);
+                    } 
+                }
             }
         }
-     }
     }
 
-    // monsterInsideCanvasCheck() {
-      
-    //     for (let i = 0; i < this.monsters.length; i++) {
 
-    //     if (this.monsters[i].x < 0) {
-    //             this.monsters.splice(i, 1);
-    //              return console.log(`monsters after canvas collision ${this.monsters}`)
-    //     }
-    //     }
-    // }
-
-    marshHouseCollisionCheck (){ // checks if the marshmallow collides with the house (bolean)
+    marshHouseCollisionCheck (){ // checks if the marshmallow collides with the house
         
         if (this.marsh.length !== 0){
             for (let i = 0; i < this.marsh.length; i++) {
             
                 // marsh - gingerbread house collision ==> win game
                 if (this.detectCollision(this.gingerbHouse, this.marsh[i])){
-                    this.marsh.splice(i, 1);
-                    return this.gameIsWon = true;
+                    this.scoreMarsh += 1;
+                    return this.marsh.splice(i, 1);
                 }
+            }
         }
     }
-    }
 
-    updateScore (){ // updates the score in the heading
+// SCORE function <===============================================================
 
-        document.querySelector('.value').innerText = this.score;
+    updateScoreBoard (){ // updates the score in the heading
+        document.querySelector('.monster').innerText = this.scoreMonster;
+        document.querySelector('.marsh').innerText = this.scoreMarsh;
+        document.querySelector('.time').innerText = (this.timer).toFixed(0);
+
     }
 
 
 // END GAME functions <===============================================================
 
+
+
     checkGameIsOver() {
-        if (this.gameIsOver){ // if monster collides with marsh the game ends
-            return this.gameOver();
+        this.didYouWin();
+        if (this.timer < 0){
+            this.gameStop = true; 
+            return this.gameOver(); 
         }
-        else if (this.gameIsWon){ // if marshmallows collides with the house you win
+    }
+
+    didYouWin(){
+         if (this.scoreMarsh === 5){ // if 10 marsh are safe you win
+            this.gameStop = true;
             return this.gameWin();
         }
     }
 
     gameOver(){
-        this.gameStop = true;
         this.gameOverSound.play();
-        return callGameOver();
-       
+        callGameOver();
+        return this.updateScoreBoard();  
     }
 
 
     gameWin(){
-        this.gameStop = true;
         this.themeSound.pause();
-        this.winSound.volume=0.1;
+        this.winSound.volume = 0.1;
         this.winSound.play();
         callWonGame();
-        return this.updateScore ();
+        return this.updateScoreBoard();
     }
+
 }
+

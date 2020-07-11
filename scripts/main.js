@@ -59,7 +59,7 @@ window.onload = () => {
     };
 
     //description
-    addElement('p').innerText = 'Use the arrows to help Croc intercepting the monsters!';
+    addElement('p').innerText = 'Use the arrows to help Croc intercepting the jelly monsters!';
 
     // Arrows image + attributes
     let ArrowsImg = addElement('img');
@@ -73,12 +73,17 @@ window.onload = () => {
 
     //creates scoreboard
     let scoreBoard = buildScoreBoard(`
-      <header>
-        <div class="score">
-          <span class="label">Defeated monsters:</span>
-          <span class="value">0</span>
-        </div>
-      </header>
+    <header>
+    <div class="score">
+      <span class="label">Safe mash:</span>
+      <span class="value marsh">10</span>
+      <span class="label">Jelly monsters eaten:</span>
+      <span class="value monster">0</span>
+      <br>
+      <span class="label">Countdown:</span>
+      <span class="value time">00</span>
+    </div>
+  </header>
   `);
     
     let styleCont = document.getElementById('style-container');
@@ -94,9 +99,28 @@ window.onload = () => {
   drawGameOverScreen = () => {
 
       createContainer();
+
+      // creates scoreboard
+      let scoreBoard = buildScoreBoard(`
+      <header>
+      <div class="score">
+        <span class="label">Safe mash:</span>
+        <span class="value marsh">10</span>
+        <span class="label">Jelly monsters eaten:</span>
+        <span class="value monster">0</span>
+        <br>
+        <span class="label">Time left:</span>
+        <span>00</span>
+      </div>
+    </header>   
+  `);
+
+  let styleCont = document.getElementById('style-container');
+  styleCont.appendChild(scoreBoard);
+
       // headings
       addElement('h1').innerText = 'GAME OVER';
-      addElement('h3').innerText = 'The monster army won this round!';
+      addElement('h3').innerText = 'The jelly monster army won this round!';
 
       // Croc image + attributes
       let crocImg = addElement('img');
@@ -118,12 +142,17 @@ window.onload = () => {
 
         // creates scoreboard
         let scoreBoard = buildScoreBoard(`
-        
-          <div class="win - score">
-            <span class="label">Defeated monsters:</span>
-            <span class="value">0</span>
-          </div>
-        
+        <header>
+        <div class="score">
+          <span class="label">Safe mash:</span>
+          <span class="value marsh">10</span>
+          <span class="label">Jelly monsters eaten:</span>
+          <span class="value monster">0</span>
+          <br>
+          <span class="label">Countdown:</span>
+          <span class="value time">00</span>
+        </div>
+      </header>   
     `);
       
       let styleCont = document.getElementById('style-container');
@@ -132,7 +161,7 @@ window.onload = () => {
 
     // add headings
     addElement('h1').innerText = 'You are a HERO!';
-    addElement('h3').innerText = 'The Marsh is safe and sound in the gingerbread house';
+    addElement('h3').innerText = 'The Marshmallows are safe and sound in the gingerbread house';
 
     // Croc image + attribute
     let crocWin =  addElement('img');
