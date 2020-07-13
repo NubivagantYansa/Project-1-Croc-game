@@ -42,12 +42,12 @@ window.onload = () => {
   drawSplashScreen = () => {
 
     createContainer();
-    //heading
-    addElement('h1').innerText = 'Croc saves Marshland';
 
     // Croc image + attributes
     let crocImg = addElement('img');
     setAttributes (crocImg, {'src': 'imges/frame-1.png', 'alt': 'croc-logo', 'class': 'logo-img'})
+
+    addElement('br');
 
     //button
     let startbtn = addElement('button');
@@ -61,10 +61,8 @@ window.onload = () => {
     //description
     addElement('p').innerText = 'Use the arrows to help Croc intercepting the jelly monsters!';
 
-    // Arrows image + attributes
-    let ArrowsImg = addElement('img');
-    setAttributes (ArrowsImg, {'src': 'imges/arrows.png', 'alt': 'arrows-logo', 'class': 'logo-img'})
-
+    //heading
+    addElement('h1').innerText = 'Croc saves Marshland';
   };
 
   drawGameScreen = () => { 
@@ -75,9 +73,9 @@ window.onload = () => {
     let scoreBoard = buildScoreBoard(`
     <header>
     <div class="score">
-      <span class="label">Safe mash:</span>
+      <span class="label">Safe Marsh:</span>
       <span class="value marsh">10</span>
-      <span class="label">Jelly monsters eaten:</span>
+      <span class="label">Jelly Monsters Eaten:</span>
       <span class="value monster">0</span>
       <br>
       <span class="label">Countdown:</span>
@@ -104,15 +102,15 @@ window.onload = () => {
       let scoreBoard = buildScoreBoard(`
       <header>
       <div class="score">
-        <span class="label">Safe mash:</span>
+        <span class="label">Safe Marsh:</span>
         <span class="value marsh">10</span>
-        <span class="label">Jelly monsters eaten:</span>
+        <span class="label">Jelly Monsters Eaten:</span>
         <span class="value monster">0</span>
         <br>
-        <span class="label">Time left:</span>
-        <span>00</span>
+        <span class="label">Countdown:</span>
+        <span class="value ">00</span>
       </div>
-    </header>   
+    </header>  
   `);
 
   let styleCont = document.getElementById('style-container');
@@ -125,6 +123,8 @@ window.onload = () => {
       // Croc image + attributes
       let crocImg = addElement('img');
       setAttributes (crocImg, {'src': 'imges/croc-faint.png', 'alt': 'croc-logo', 'class': 'logo-img'})
+
+      addElement('br');
 
       // button
       let startbtn = addElement('button');
@@ -144,15 +144,15 @@ window.onload = () => {
         let scoreBoard = buildScoreBoard(`
         <header>
         <div class="score">
-          <span class="label">Safe mash:</span>
+          <span class="label">Safe Marsh:</span>
           <span class="value marsh">10</span>
-          <span class="label">Jelly monsters eaten:</span>
+          <span class="label">Jelly Monsters Eaten:</span>
           <span class="value monster">0</span>
           <br>
           <span class="label">Countdown:</span>
           <span class="value time">00</span>
         </div>
-      </header>   
+      </header>  
     `);
       
       let styleCont = document.getElementById('style-container');
@@ -166,7 +166,9 @@ window.onload = () => {
     // Croc image + attribute
     let crocWin =  addElement('img');
     setAttributes (crocWin, {'src': 'imges/croc-jump.png', 'alt': 'croc-logo', 'class': 'logo-img'})
-
+    
+    addElement('br');
+    
     // button
     let playAgainbtn = addElement('button')
     playAgainbtn.setAttribute('id', 'start-button')
