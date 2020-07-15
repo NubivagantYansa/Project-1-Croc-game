@@ -3,7 +3,7 @@ class Game {
         this.canvas = undefined; //initiated in init()
         this.ctx = undefined; //initiated in init()
         this.backgroundImg = new Image();
-        this.player = new Player(this, 400, 550, 90, 120, 30); //creates new instance of player
+        this.player = new Player(this, 400, 550, 90, 120, 30, 20, 0, 6104, 447); //creates new instance of player
         this.monsters = []; //contains monsters
         this.marsh = []; //contains marshmallows
         this.bonus = []; //contains bonuses
@@ -51,6 +51,7 @@ class Game {
         this.createMonster();
         this.createMarsh();
         this.createBonus();
+        this.player.update(); //sprites
 
 
         const animation = setInterval(() => {
@@ -86,7 +87,7 @@ class Game {
 // DRAWING functions: draw, create, add characters to canvas <===============================================================
 
     drawPlayer() { // draws Player
-        this.player.drawComponent("imges/frame-1.png");
+            this.player.drawComponent("imges/crocmoves.png");
     }
 
     createMonster(){
@@ -142,7 +143,7 @@ class Game {
     }
 
     drawHouse (){ //draws the house 
-        this.gingerbHouse.drawComponent("imges/GingerBreadHouse1.png");
+        this.gingerbHouse.draw();
     }
 
     drawBackground() { //draws background
@@ -170,16 +171,11 @@ class Game {
     const char2Top = char2.y;
     const char2Bottom = char2.y + char2.height;
 
-
-    const crossLeft = char2Left <= char1Right && char2Left >= char1Left;
-    const crossRight = char2Right >= char1Left && char2Right <= char1Right;
-    const crossTop = char2Top <= char1Bottom && char2Top >= char1Top;
-    const crossBottom = char2Bottom >= char1Top && char2Bottom <= char1Bottom;
-        
-        if ((crossLeft || crossRight) && (crossTop || crossBottom)) {
-			return true; 
+    // if condition is true the characters are not colliding
+        if (char1Top > char2Bottom || char1Right< char2Left || char1Bottom < char2Top || char1Left > char2Right)  {
+			return false; 
         }
-        return false;
+        return true;
     }
 
     checkAllCollisions(){ //helper function to group collisions 
@@ -195,7 +191,7 @@ class Game {
             
             if (this.detectCollision(this.monsters[i], this.player)){
                 this.scoreMonster += 1;
-                this.themeSound.volume=0.1;
+                this.monsterSound.volume=0.1;
                 this.monsterSound.play();
                 return this.monsters.splice(i, 1);
 
@@ -294,6 +290,7 @@ class Game {
     }
 
     gameOver(){
+        this.gameOverSound.volume=0.2;
         this.gameOverSound.play();
         callGameOver();
         return this.updateScoreBoard();  

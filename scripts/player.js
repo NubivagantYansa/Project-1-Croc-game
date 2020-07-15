@@ -1,30 +1,25 @@
 class Player extends Component {
-    constructor(game, x, y, w, h, speed) {
-      super(game, x, y, w, h, speed);
+    constructor(game, x, y, w, h, speed, totFrames, imgFrameNum, frameWidth, frameHeight) {
+      super(game, x, y, w, h, speed, totFrames, imgFrameNum, frameWidth, frameHeight);
     }
     
     move() {
       document.onkeydown = (event) => {
-        const key = event.keyCode;
-        const possibleKeysStrokes = [37, 38, 39, 40];
-        if (possibleKeysStrokes.includes(key)) {
-          switch (key) {
-            case 37: //left
-              if (this.x >= 10) this.x -= this.speed;
-              break;
-            case 38: //up
-              if (this.y >= 10) this.y -= this.speed;
-              break;
-            case 39: //right
-              if (this.x <= 1200 - this.width) this.x += this.speed;
-              break;
-            case 40: //down
-              if (this.y <= 790 - this.height) this.y += this.speed;
-              break;
-          }
-        }
+        event.preventDefault() // stops the button scrolling the page
+      if (event.keyCode == 40 && this.y <= 790 - this.height) { // down
+         this.y += this.speed;
+         
+
+      } else if (event.keyCode == 38 && this.y >= 10) { // up
+        this.y -= this.speed;   
+
+      } else if(event.keyCode == 39 && this.x <= 1200 - this.width) { // right 
+         this.x += this.speed;   
+
+      } else if(event.keyCode == 37 && this.x >= 10) { // left
+        this.x -= this.speed;       
       }
 
     }
-  
-}
+  }
+}   
