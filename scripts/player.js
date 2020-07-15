@@ -6,7 +6,7 @@ class Player extends Component {
     move() {
       document.onkeydown = (event) => {
         event.preventDefault() // stops the button scrolling the page
-      if (event.keyCode == 40 && this.y <= 790 - this.height) { // down
+      if (event.keyCode == 40 && this.y <= 700 - this.height) { // down
          this.y += this.speed;
          
 

@@ -22,7 +22,7 @@ class Game {
         this.gameStop = false;
 
         this.width = 1200; //width of canvas
-        this.height = 810; //height of canvas
+        this.height = 720; //height of canvas
 
         // audio
         this.monsterSound = new Audio ('sounds/squeeze.ogg');
@@ -223,6 +223,7 @@ class Game {
             
                 // marsh - gingerbread house collision ==> win game
                 if (this.detectCollision(this.gingerbHouse, this.marsh[i])){
+                    this.marshSound.volume=0.2;
                     this.marshSound.play();
                     this.scoreMarsh += 1;
                     return this.marsh.splice(i, 1);
@@ -237,6 +238,7 @@ class Game {
         for (let i = 0; i < this.bonus.length; i++) {
             
             if (this.detectCollision(this.bonus[i], this.player)){
+                this.marshSound.volume=0.2;
                 this.bonusSound.play();
                 this.scoreMarsh += 1;
                 return this.bonus.splice(i, 1);
