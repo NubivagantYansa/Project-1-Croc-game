@@ -43,6 +43,9 @@ window.onload = () => {
 
     createContainer();
 
+    //description
+    addElement('p').innerText = 'Use the arrows to help Croc intercepting the jelly monsters!';
+
     // Croc image + attributes
     let crocImg = addElement('img');
     setAttributes (crocImg, {'src': 'imges/frame-1.png', 'alt': 'croc-logo', 'class': 'logo-img'})
@@ -57,9 +60,6 @@ window.onload = () => {
     document.getElementById('start-button').onclick = () => {
         startGame();
     };
-
-    //description
-    addElement('p').innerText = 'Use the arrows to help Croc intercepting the jelly monsters!';
 
     //heading
     addElement('h1').innerText = 'Croc saves Marshland';
@@ -91,7 +91,7 @@ window.onload = () => {
     // creates canvas
     let canvas = addElement('canvas');
     // sets attributes
-    setAttributes (canvas, {'id': 'canvas', 'width': '1250px', 'height': '810px'});
+    setAttributes (canvas, {'id': 'canvas', 'width': '1200px', 'height': '810px'});
   }
 
   drawGameOverScreen = () => {

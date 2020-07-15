@@ -16,7 +16,7 @@ class Player extends Component {
               if (this.y >= 10) this.y -= this.speed;
               break;
             case 39: //right
-              if (this.x <= 1230 - this.width) this.x += this.speed;
+              if (this.x <= 1200 - this.width) this.x += this.speed;
               break;
             case 40: //down
               if (this.y <= 790 - this.height) this.y += this.speed;

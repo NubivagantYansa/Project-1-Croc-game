@@ -5,7 +5,7 @@ class Marsh extends Component {
       this.y = 810;
       this.width = 80;
       this.height = 80;
-      this.speed = 10;
+      this.speed = 7;
       this.img = new Image();
     }
     
