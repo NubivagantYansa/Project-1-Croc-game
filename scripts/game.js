@@ -90,7 +90,7 @@ class Game {
     }
 
     createMonster(){
-        if (!this.gameStop && this.monsters.length < 5){
+        if (!this.gameStop && this.monsters.length < 10){
 
         if (Math.floor(Math.random() * 20) % 2 === 0) {
             this.monsters.push(new Monster(this));
