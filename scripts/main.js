@@ -1,6 +1,6 @@
 window.onload = () => {
 
-  // HELPERS for DOM manipulation =====================
+  // HELPERS for DOM manipulation // =====================
 
   createContainer = () => { //create a div container for the elemens of the screen
     let parent = document.getElementById('game-board');
@@ -31,13 +31,16 @@ window.onload = () => {
       return div.children[0];
     };
 
-  // SCREENS ========================================================
-
   removeScreen = () => {
-      let screen = document.getElementById('style-container');
-      return   screen.parentNode.removeChild(screen);
-      
-  };
+    let screen = document.getElementById('style-container');
+    return   screen.parentNode.removeChild(screen);
+    
+    };
+
+
+  
+  // SCREENS // ========================================================
+
 
   drawSplashScreen = () => {
 
@@ -182,13 +185,12 @@ window.onload = () => {
   }
 
 
-  // Setting Game State ==============================
+// Setting Game State // ==============================
 
   
   callGameOver = () =>{
     removeScreen();
     return drawGameOverScreen();
-
   }
 
   callWonGame = () =>{
@@ -196,6 +198,7 @@ window.onload = () => {
     return drawWinScreen();
   }
 
+// START GAME // =========================================
 
   drawSplashScreen();
 

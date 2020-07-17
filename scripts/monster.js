@@ -14,10 +14,8 @@ class Monster extends Component {
     this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 
-  move() {
-    if (Math.floor(Math.random() * 20) % 3 === 0) { //moves the monster randomly
-      this.x -= this.speed;
-    }
-  }
+  move() { //moves the monster randomly
 
+    if (Math.floor(Math.random() * 20) % 3 === 0) this.x -= this.speed;
+  }
 }

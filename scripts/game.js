@@ -3,7 +3,7 @@ class Game {
         this.canvas = undefined; //initiated in init()
         this.ctx = undefined; //initiated in init()
         this.backgroundImg = new Image();
-        this.player = new Player(this, 400, 550, 90, 120, 30, 20, 0, 6104, 447); //creates new instance of player
+        this.player = new Player(this, 400, 550, 90, 120, 30, 20, 0, 6104, 447, []); //creates new instance of player
         this.monsters = []; //contains monsters
         this.marsh = []; //contains marshmallows
         this.bonus = []; //contains bonuses
@@ -13,8 +13,9 @@ class Game {
         this.x = 0;
         this.y = 0;
 
+
         // Countdown timer (100 = about 30 seconds)
-        this.timer = 100;
+        this.timer = 80;
 
         // flags end game
         this.gameIsOver = false;
@@ -87,15 +88,14 @@ class Game {
 // DRAWING functions: draw, create, add characters to canvas <===============================================================
 
     drawPlayer() { // draws Player
-            this.player.drawComponent("imges/crocmoves.png");
+        this.player.drawComponent("imges/crocSpriteAll.png");
     }
 
     createMonster(){
         if (!this.gameStop && this.monsters.length < 10){
 
-        if (Math.floor(Math.random() * 20) % 2 === 0) {
-            this.monsters.push(new Monster(this));
-        }
+        if (Math.floor(Math.random() * 20) % 2 === 0) this.monsters.push(new Monster(this));
+
           setTimeout(() => { 
             this.createMonster();
           }, 1000);
@@ -103,27 +103,24 @@ class Game {
     }
 
     createMarsh (){ 
-        if (!this.gameStop && this.marsh.length <= 3){
+        if (!this.gameStop){
 
-        if (Math.floor(Math.random() * 10) % 2 === 0) { //creates random marshmallows
-            this.marsh.push(new Marsh (this)); //push marshmallow in the array
-        }
+        if (Math.floor(Math.random() * 10) % 2 === 0) this.marsh.push(new Marsh (this)); 
+
          setTimeout(() => {
             this.createMarsh();
-          }, 1000);
+          }, 2000);
         }
     }
 
     createBonus (){ 
         if (!this.gameStop){
 
-                if (Math.floor(Math.random() * 10) % 2 === 0) {
-                    this.bonus.push(new Bonus (this));
-                }
-
-                  setTimeout(() => { 
-                    this.createBonus();
-                  }, 5000);
+            if (Math.floor(Math.random() * 10) % 2 === 0) this.bonus.push(new Bonus (this));
+                
+            setTimeout(() => { 
+                this.createBonus();
+            }, 5000);
         }
     }
 
@@ -172,16 +169,14 @@ class Game {
     const char2Bottom = char2.y + char2.height;
 
     // if condition is true the characters are not colliding
-        if (char1Top > char2Bottom || char1Right< char2Left || char1Bottom < char2Top || char1Left > char2Right)  {
-			return false; 
-        }
+        if (char1Top > char2Bottom || char1Right< char2Left || char1Bottom < char2Top || char1Left > char2Right) return false; 
         return true;
     }
 
     checkAllCollisions(){ //helper function to group collisions 
         this.monsterMarshCollisionCheck ();
         this.monsterPlayerCollisionCheck ();
-        this.monsterMarshCollisionCheck();
+        this.monsterMarshCollisionCheck ();
         this.marshHouseCollisionCheck ();
         this.playerBonusCollisionCheck ();
     }
@@ -207,9 +202,7 @@ class Game {
                 
                 for (let j = 0; j < this.marsh.length; j++){ // check monster - marsh collision for each marsh in canvas
                         
-                    if (this.detectCollision(this.marsh[j], this.monsters[i])){
-                        return this.marsh.splice(j, 1);
-                    } 
+                    if (this.detectCollision(this.marsh[j], this.monsters[i])) this.marsh.splice(j, 1); 
                 }
             }
         }
@@ -252,6 +245,9 @@ class Game {
     }
 }
 
+
+
+
 // SCORE function <===============================================================
 
     updateScoreBoard (){ // updates the score in the heading
@@ -261,16 +257,22 @@ class Game {
 
     }
 
+
+
+
 // CHANGE SPEED GAME last 20 seconds  <===============================================================
 
     changeGameSpeed(){
         if (this.timer < 20 && this.timer > 0){
+            this.themeSound.playbackRate=2.0;
 
             for (let i = 0; i < this.monsters.length; i++) {
                 this.monsters[i].speed = 20;
             } 
         }
     }
+
+
 
 // END GAME functions <===============================================================
 
@@ -292,6 +294,7 @@ class Game {
     }
 
     gameOver(){
+        this.themeSound.playbackRate=1.0;
         this.gameOverSound.volume=0.2;
         this.gameOverSound.play();
         callGameOver();

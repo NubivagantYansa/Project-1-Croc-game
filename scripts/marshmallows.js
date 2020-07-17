@@ -14,11 +14,9 @@ class Marsh extends Component {
       this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
   
-    move() {
-      if (Math.floor(Math.random() * 20) % 3 === 0) { 
-        this.y -= this.speed;
-      }
+    move() { //moves the marsh randomly
+      
+      if (Math.floor(Math.random() * 20) % 3 === 0) this.y -= this.speed;
     }
-
 }
   

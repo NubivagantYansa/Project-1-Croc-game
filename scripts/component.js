@@ -1,5 +1,5 @@
 class Component {
-    constructor(game, x, y, w, h, speed, totFrames, imgFrameNum, frameWidth, frameHeight) {
+    constructor(game, x, y, w, h, speed, totFrames, imgFrameNum, frameWidth, frameHeight, keys) {
       this.game = game;
       this.x = x;
       this.y = y;
@@ -7,6 +7,7 @@ class Component {
       this.height = h;
       this.speed = speed;
       this.img = new Image();
+      this.keys = keys;
 
       this.totalNumberOfFrames = totFrames; // twenty images in the spritesheet
       this.imageFrameNumber = Math.floor(imgFrameNum) // This is changed to make the sprite animate  
@@ -16,20 +17,49 @@ class Component {
     }
 
 
-    update (){
-      setInterval(() => {
-        
-    // Changes the sprite we look at    
-    this.imageFrameNumber++; 
+    update (){ //sprite image update
 
-    // Make the frames loop
-    let maxFrame = 2;
-    if (this.imageFrameNumber >= maxFrame){
-      this.imageFrameNumber = 0; 
+      setInterval(() => {
+
+    //idle sprite animation
+    if (!this.keys.includes(37) 
+    && !this.keys.includes(39)){
+
+        this.imageFrameNumber++;   
+        let maxFrame = 4;
+        //restarts the loop
+        if (this.imageFrameNumber >= maxFrame) this.imageFrameNumber = 0;
+        this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; // Change this from 0 to 1 to 2 ... upto end of sprite tile and back to 0 again, then 1...
+    }
+
+      //move left sprite animation
+      if(this.keys.includes(37)){
+        
+        this.imageFrameNumber++;   
+        let maxFrame = 13;
+        if (this.imageFrameNumber >= maxFrame) this.imageFrameNumber = 9; 
+        this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; 
       }
-    // Change this from 0 to 1 to 2 ... upto end of sprite tile and back to 0 again, then 1...
-    this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; 
-    }, 260);
+
+      //move right sprite animation
+      if(this.keys.includes(39)){
+        
+        this.imageFrameNumber++;
+        let maxFrame = 7;
+        if (this.imageFrameNumber >= maxFrame) this.imageFrameNumber = 3;
+        this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; 
+      }
+
+      //move left sprite animation
+      if(this.keys.includes(40) || this.keys.includes(38)){
+        
+        this.imageFrameNumber++;
+        let maxFrame = 19;
+        if (this.imageFrameNumber >= maxFrame) this.imageFrameNumber = 16; 
+        this.imageFrameNumber = this.imageFrameNumber % this.totalNumberOfFrames; 
+      }
+
+    }, 160);
     }
 
 
