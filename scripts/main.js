@@ -164,7 +164,7 @@ window.onload = () => {
 
     // add headings
     addElement('h2').innerText = 'You are a HERO!';
-    addElement('h3').innerText = 'The Marshmallows are safe and sound in the gingerbread house';
+    addElement('h3').innerText = 'All the Marshmallows are safe and sound in the gingerbread house';
 
     // Croc image + attribute
     let crocWin =  addElement('img');

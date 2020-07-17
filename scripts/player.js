@@ -3,6 +3,7 @@ class Player extends Component {
       super(game, x, y, w, h, speed, totFrames, imgFrameNum, frameWidth, frameHeight, keys);
     }
     
+    
     move() {
       document.onkeydown = (event) => {
 

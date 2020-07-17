@@ -9,6 +9,7 @@ class Component {
       this.img = new Image();
       this.keys = keys;
 
+      //sprites
       this.totalNumberOfFrames = totFrames; // twenty images in the spritesheet
       this.imageFrameNumber = Math.floor(imgFrameNum) // This is changed to make the sprite animate  
       this.widthOfImage = frameWidth; // find the width of the image

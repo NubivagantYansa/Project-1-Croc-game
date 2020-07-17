@@ -264,7 +264,7 @@ class Game {
 
     changeGameSpeed(){
         if (this.timer < 20 && this.timer > 0){
-            this.themeSound.playbackRate=2.0;
+            this.themeSound.playbackRate=1.5;
 
             for (let i = 0; i < this.monsters.length; i++) {
                 this.monsters[i].speed = 20;

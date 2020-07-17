@@ -18,5 +18,4 @@ class Marsh extends Component {
       
       if (Math.floor(Math.random() * 20) % 3 === 0) this.y -= this.speed;
     }
-}
-  
+};

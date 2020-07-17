@@ -16,6 +16,7 @@ body {
     
 }
 
+/* Outside game container */
 
 #game-board {
     margin: 5px;
@@ -23,6 +24,7 @@ body {
    
 }
 
+/* Inside game container -- contains all Screen */
 
 #style-container {
     margin: 10px;
@@ -34,6 +36,8 @@ body {
     
 }
 
+/* Splash screen */
+
 h1 {
     color:  lightcoral;
     font-size: 5em;
@@ -43,6 +47,7 @@ h1 {
     margin-right: 100px;
     text-shadow: 6px 4px 6px #000000;
 }
+
 
 p {
     font-size: 0.7em;
@@ -63,6 +68,7 @@ p {
     border: 2px solid white
 }
 
+/* Canvas dimensions on screen */
 
 #canvas {
     border: 2px white solid;
@@ -77,6 +83,8 @@ p {
     margin-top: 50px;
 }
 
+
+/* Start/play again buttons */
 
 button {
     font-size: 30px;
@@ -98,6 +106,9 @@ button:hover {
     color: blue;
 }
 
+
+/* Scoreboard */
+
 .score {
     font-size: 25px;
     font-weight: 400;
@@ -113,6 +124,9 @@ button:hover {
 .value {
    font-weight: 900;
 }
+
+
+/* GAME OVER _ WINNING screens */
 
 h2 {
     color:  lightcoral;
@@ -132,6 +146,7 @@ h3{
     width: 100%;
     text-align: center;
 }
+
 
 .logo-img2 {
     height: 300px;

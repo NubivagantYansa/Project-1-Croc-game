@@ -2,10 +2,10 @@
 
 ## Description
 
-Croc saves Marshland is a game where the player has to move Croc to stop the monsters from colliding with the hairy marshmallows. After 20 seconds, the speed intervals randomize themselves and get quicker for higher difficulty. If you survive 1 minute you win the game. If the monsters get to pass Croc and collide with the Marshmallows, it’s game over.
+Croc saves Marshland is a game where the player has to move Croc to stop the monsters from colliding with the hairy marshmallows. The speed increases in the last 20 seconds for higher difficulty. The game lasts 1 minute. To win, 10 marshmellows must reach the gingerbread house. Extra points are added when collecting white candies.
 
 ## MVP (DOM - CANVAS)
-- Croc starts from the middle and uses the arrows to move horizontally/vertically/diagonally.
+- Croc starts from the middle of the canvas and uses the arrow keys to move horizontally/vertically.
 - Random monsters come from the right side of the screen and disappear when they reach the left side.
 - Random marshmallows come from the bottom-left side of the screen and move to the top side.
 - If a monster collides with a marshmallow, the game ends.
@@ -13,21 +13,17 @@ Croc saves Marshland is a game where the player has to move Croc to stop the mon
 - If marshmallows reach the house in the top-left side of the screen, they disappear.
 
 ## Backlog
-- Timer
-- Sounds
-- Special Effects
-- Sprites
-- Speed up
-- Score
+- Timer (seconds).
+- Animated Sprites for all characters
 - Multiple enemies
 - Bonus items randomly appearing to slow down the speed
-- Bonuses
+- Smooter movements
 - Badges
 
 ## Data structure
 ### main.js
 ```
-removeScreen (){}
+removeScreen (){} 
 drawSplashScreen(){}
 drawGameScreen(){}
 drawGameOverScreen(){}
@@ -37,20 +33,18 @@ game.js
 ```
 game () {
 - constructor()
-- init()
-- animate ()
-- drawPlayer ()
-- createMonsters()
-- createMarsh()
-- drawHouse ()
+- init() //initiate canvas
+- animate () //game loop
+- drawPlayer () / drawHouse () /drawBackground ()
+- createMonsters() / createMarsh() / createBonus()
 - clear()
-- drawBackground ()
-- addChacters ()
+- addChacters () / addBonus ()
 - detectCollision()
-- monsterCollisionCheck()
-- marshHouseCollisionCheck()
-- updateScore ()
+- monsterPlayerCollisionCheck() / monsterMarshCollisionCheck () /  marshHouseCollisionCheck () / playerBonusCollisionCheck ()
+- updateScoreBoard ()
+- changeGameSpeed()
 - checkGameIsOver()
+- didYouWin ()
 - gameOver ()
 - gameWin ()
 }
@@ -59,6 +53,7 @@ component.js
 ```
 component{
 - constructor()
+- update ()
 - drawComponent()
 }
 ```
@@ -85,10 +80,19 @@ Marsh extends Component(){
 - move ()
 }
 ```
+bonus.js
+```
+Bonus extends Component(){
+- constructor()
+- draw()
+- move ()
+}
+```
 gingerbHouse.js
 ```
 house extends Component ()
 ```
+
 ## States e States Transitions
 Definition of the different states and their transition (transition functions)
 ```

@@ -13,6 +13,4 @@ class Bonus extends Component {
       this.img.src = "imges/bonus.png";
       this.game.ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
-  
-
 }
