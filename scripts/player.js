@@ -15,15 +15,15 @@ class Player extends Component {
        this.y += this.speed;
        if (this.imageFrameNumber <= 16 )this.imageFrameNumber = 16; 
 
-      } else if (event.keyCode == 38 && this.y >= 10) { // up
+      } else if (event.keyCode == 38 && this.y >= 170) { // up
         this.y -= this.speed;   
         if (this.imageFrameNumber <= 16 )this.imageFrameNumber = 16; 
 
-      } else if (event.keyCode == 39 && this.x <= 1200 - this.width) { // right 
+      } else if (event.keyCode == 39 && this.x <= 1178 - this.width) { // right 
          this.x += this.speed;
          if (this.imageFrameNumber <= 3 )this.imageFrameNumber = 3; //update frame animation   
 
-      } else if (event.keyCode == 37 && this.x >= 10) { // left
+      } else if (event.keyCode == 37 && this.x >= 20) { // left
         this.x -= this.speed;  
         if (this.imageFrameNumber <= 8 )this.imageFrameNumber = 8; //update frame animation
        

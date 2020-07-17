@@ -2,7 +2,7 @@ class Monster extends Component {
   constructor(game) {
     super(game);
     this.x = 1200;
-    this.y = Math.floor(Math.random() * 340 + 250); 
+    this.y = Math.floor(Math.random() * 350 + 250); 
     this.width = 100;
     this.height = 100;
     this.speed = 10;

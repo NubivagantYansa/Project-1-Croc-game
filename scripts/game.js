@@ -7,7 +7,7 @@ class Game {
         this.monsters = []; //contains monsters
         this.marsh = []; //contains marshmallows
         this.bonus = []; //contains bonuses
-        this.gingerbHouse = new House(this, 0, 0, 280, 300); //creates new instance of house
+        this.gingerbHouse = new House(this, 0, 0, 250, 250); //creates new instance of house
         this.scoreMonster = 0; //keeps count of killed monsters
         this.scoreMarsh = 0; //keeps count of marshmallows that reach the house
         this.x = 0;

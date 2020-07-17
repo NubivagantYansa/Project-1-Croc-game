@@ -1,7 +1,7 @@
 class Marsh extends Component {
     constructor(game) {
       super(game);
-      this.x = Math.floor(Math.random() * 200 + 20);
+      this.x = Math.floor(Math.random() * 150 + 20);
       this.y = 710;
       this.width = 80;
       this.height = 80;
