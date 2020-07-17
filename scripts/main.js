@@ -50,7 +50,7 @@ window.onload = () => {
     addElement('h1').innerText = 'Croc';
 
     //description
-    addElement('p').innerHTML = 'Help the marshmallows reach the gingerbread house! <br> Move Croc with the arrow keys and eat the jelly monsters. You get extra points for collecting yellow candy!';        
+    addElement('p').innerHTML = 'Help the marshmallows reach the gingerbread house! <br> Move Croc with the arrow keys and eat the jelly monsters. You get extra points for collecting white candies!';        
 
     // Croc image + attributes
     let crocImg = addElement('img');
